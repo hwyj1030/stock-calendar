@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="삼성전자와 SK하이닉스 실적 발표 일정을 한눈에 확인하는 캘린더">
+  <title>실적 캘린더 — 삼성전자 · SK하이닉스</title>
+  <style>
+    :root{--bg:#f7f8fa;--card:#fff;--ink:#17191d;--muted:#818793;--line:#eceef1;--blue:#2864dc;--blue-soft:#edf3ff;--purple:#7156c9;--purple-soft:#f2efff;--green:#1f8b64;--shadow:0 12px 38px rgba(24,35,54,.055);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color:var(--ink);font-synthesis:none}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg)}button,a{font:inherit}button{color:inherit}.shell{width:min(1120px,calc(100% - 48px));margin:auto}header{height:72px;display:flex;align-items:center;border-bottom:1px solid #e9ebef;background:rgba(255,255,255,.78)}.nav{display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:760;letter-spacing:-.6px}.logo-mark{width:28px;height:28px;display:grid;place-items:center;background:#20242b;border-radius:9px;color:#fff;font-size:14px}.nav-note{font-size:12px;color:var(--muted)}
+    main{padding:46px 0 68px}.intro{display:flex;align-items:end;justify-content:space-between;margin-bottom:25px;gap:20px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}h1{margin:9px 0 0;font-size:clamp(28px,4vw,39px);letter-spacing:-1.7px;line-height:1.18}.intro-copy{margin:10px 0 0;color:#747b86;font-size:14px;line-height:1.6}.today{font-size:13px;color:#6f7580;white-space:nowrap;padding-bottom:4px}.today b{color:#262a31;font-weight:650}
+    .calendar-card{background:var(--card);border:1px solid #eaecf0;border-radius:17px;box-shadow:var(--shadow);overflow:hidden}.calendar-head{min-height:80px;padding:19px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line)}.month-control{display:flex;align-items:center;gap:14px}.month-title{min-width:143px;font-size:21px;font-weight:730;letter-spacing:-.7px}.arrows{display:flex;gap:6px}.icon-btn{width:33px;height:33px;border:1px solid var(--line);background:white;border-radius:9px;cursor:pointer;color:#606773;font-size:17px;transition:.15s}.icon-btn:hover,.today-btn:hover{border-color:#c5d0e3;background:#f8faff}.filters{display:flex;align-items:center;gap:7px}.filter{border:1px solid var(--line);background:white;padding:8px 12px;border-radius:999px;font-size:12px;color:#656b75;cursor:pointer;transition:.15s}.filter.active[data-company="all"]{background:#252a33;border-color:#252a33;color:white}.filter.active[data-company="samsung"]{background:var(--blue-soft);border-color:#d5e2ff;color:#245bc6}.filter.active[data-company="hynix"]{background:var(--purple-soft);border-color:#ded6ff;color:#6248b5}.filter-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:currentColor}.today-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:11px;color:#69717c;cursor:pointer;margin-left:5px}
+    .weekdays,.days-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}.weekdays{padding:0 20px;height:44px;align-items:center;border-bottom:1px solid var(--line);color:#858b95;font-size:11px;font-weight:650;text-align:center}.weekdays span:first-child{color:#d26f72}.weekdays span:last-child{color:#6386d0}.days-grid{padding:0 20px 18px}.day{position:relative;min-height:113px;padding:12px 10px 9px;border-right:1px solid #f1f2f4;border-bottom:1px solid #f1f2f4;cursor:pointer;transition:background .12s}.day:nth-child(7n){border-right:0}.day:hover{background:#fafbfc}.day.outside{background:#fcfcfd;color:#b5bac2}.day.selected{background:#f6f9ff;box-shadow:inset 0 0 0 1.5px #8aabf4;z-index:1}.date-num{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:610;color:#454b55}.outside .date-num{color:#b8bdc5}.day:nth-child(7n+1) .date-num{color:#d26f72}.day:nth-child(7n) .date-num{color:#6686ca}.outside:nth-child(7n+1) .date-num,.outside:nth-child(7n) .date-num{opacity:.56}.today-mark{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#252a33;color:white;font-size:10px}.event{margin-top:10px;padding:6px 7px 6px 8px;border-radius:6px;border-left:2px solid var(--blue);background:var(--blue-soft);color:#285bc0;font-size:10px;line-height:1.35;font-weight:670;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.event.hynix{border-color:var(--purple);background:var(--purple-soft);color:#654cb6}.event.estimated{border-style:dashed;opacity:.83}.event-sub{display:block;margin-top:2px;font-size:9px;font-weight:500;opacity:.8}.more{padding:5px 7px;color:#7b818b;font-size:10px}
+    .below{display:grid;grid-template-columns:1fr 310px;gap:17px;margin-top:17px}.detail,.legend{background:white;border:1px solid #eaecf0;border-radius:13px;padding:19px 21px}.detail-top{display:flex;justify-content:space-between;gap:10px;align-items:start}.detail h2{margin:0;font-size:16px;letter-spacing:-.3px}.detail-date{margin-top:5px;color:#848a94;font-size:12px}.event-list{margin-top:15px;display:grid;gap:9px}.event-row{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid #eff0f3;border-radius:9px}.event-logo{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;font-size:10px;font-weight:800;background:var(--blue-soft);color:#285bc0;flex:none}.event-row.hynix .event-logo{background:var(--purple-soft);color:#654cb6}.row-text{min-width:0;flex:1}.row-title{font-size:12px;font-weight:680}.row-meta{margin-top:4px;color:#8b9099;font-size:10px}.status{padding:5px 7px;border-radius:5px;background:#f0f2f5;color:#777e89;font-size:9px;white-space:nowrap}.status.estimate{background:#fff4df;color:#a8751c}.source-link{color:#78808c;text-decoration:none;font-size:10px}.source-link:hover{color:var(--blue);text-decoration:underline}.empty{padding:18px 2px;color:#9298a2;font-size:12px;line-height:1.65}.legend{display:flex;flex-direction:column;justify-content:space-between}.legend h3{margin:0 0 14px;font-size:13px}.legend-item{display:flex;align-items:center;gap:9px;margin:10px 0;color:#707783;font-size:11px}.legend-swatch{width:9px;height:9px;border-radius:3px;background:var(--blue)}.legend-swatch.purple{background:var(--purple)}.legend-swatch.dashed{width:14px;height:9px;background:#fff;border:1px dashed #c89439}.legend-note{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);color:#949aa4;font-size:10px;line-height:1.55}.disclaimer{margin-top:18px;color:#9298a2;font-size:10px;line-height:1.7}.disclaimer a{color:#747d8a;text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:740px){.shell{width:calc(100% - 28px)}header{height:62px}.nav-note{font-size:10px}main{padding:32px 0 46px}.intro{align-items:start;flex-direction:column;gap:10px}.today{font-size:11px}.calendar-head{padding:15px 13px;align-items:flex-start;flex-direction:column}.month-title{font-size:19px;min-width:130px}.month-control{width:100%;justify-content:space-between}.filters{width:100%;flex-wrap:wrap}.filter{padding:7px 10px;font-size:11px}.today-btn{margin-left:auto}.weekdays{padding:0 6px;height:36px;font-size:10px}.days-grid{padding:0 6px 10px}.day{min-height:77px;padding:8px 4px 5px}.date-num{font-size:10px;justify-content:center}.today-mark{width:18px;height:18px}.event{margin-top:7px;padding:5px 4px 5px 5px;font-size:8px;letter-spacing:-.3px}.event-sub{font-size:7px}.below{grid-template-columns:1fr;gap:10px}.detail,.legend{padding:16px}.legend{display:grid;grid-template-columns:1fr 1fr;gap:0 9px}.legend h3,.legend-note{grid-column:1/-1}.legend h3{margin-bottom:5px}.legend-item{margin:7px 0}.legend-note{margin-top:8px}.source-link{font-size:9px}}
+    @media(max-width:390px){.day{min-height:68px}.days-grid{padding-left:3px;padding-right:3px}.weekdays{padding-left:3px;padding-right:3px}.event{font-size:7px;padding-left:3px;padding-right:2px}.event-sub{display:none}.filters{gap:5px}.filter{padding:6px 8px}}
+  </style>
+</head>
+<body>
+  <header><div class="shell nav"><a class="logo" href="#"><span class="logo-mark">⌁</span> 실적 캘린더</a><span class="nav-note">삼성전자 · SK하이닉스</span></div></header>
+  <main class="shell">
+    <div class="intro"><div><div class="eyebrow">Earnings calendar</div><h1>다가오는 실적 발표를<br>한눈에 확인하세요</h1><p class="intro-copy">삼성전자와 SK하이닉스의 분기별 실적 발표 일정을 모았습니다.</p></div><div class="today">오늘 <b id="todayLabel"></b></div></div>
+    <section class="calendar-card" aria-label="실적 발표 캘린더">
+      <div class="calendar-head">
+        <div class="month-control"><div class="month-title" id="monthTitle"></div><div class="arrows"><button class="icon-btn" id="prevMonth" aria-label="이전 달">‹</button><button class="icon-btn" id="nextMonth" aria-label="다음 달">›</button></div><button class="today-btn" id="currentMonth">이번 달</button></div>
+        <div class="filters" aria-label="기업 필터"><button class="filter active" data-company="all">전체</button><button class="filter" data-company="samsung"><span class="filter-dot" style="color:#2864dc"></span>삼성전자</button><button class="filter" data-company="hynix"><span class="filter-dot" style="color:#7156c9"></span>SK하이닉스</button></div>
+      </div>
+      <div class="weekdays" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+      <div class="days-grid" id="daysGrid"></div>
+    </section>
+    <div class="below">
+      <section class="detail" aria-live="polite"><div class="detail-top"><div><h2 id="detailTitle">선택한 날짜</h2><div class="detail-date" id="detailDate"></div></div></div><div class="event-list" id="eventList"></div></section>
+      <aside class="legend"><div><h3>일정 안내</h3><div class="legend-item"><i class="legend-swatch"></i>삼성전자</div><div class="legend-item"><i class="legend-swatch purple"></i>SK하이닉스</div><div class="legend-item"><i class="legend-swatch dashed"></i>예상 일정</div></div><div class="legend-note">예상 일정은 기업의 공식 발표 전까지 변경될 수 있습니다. 공식 일정이 공개되면 출처 링크를 확인하세요.</div></aside>
+    </div>
+    <p class="disclaimer">일정은 한국 시간 기준입니다. 과거 발표일은 각 기업 공식 자료를, 다가오는 일정은 공개된 시장 예상치를 참고했습니다. 투자 판단의 근거로 단독 사용하지 마세요.<br>출처: <a href="https://www.samsung.com/global/ir/financial-information/earnings-release/" target="_blank" rel="noreferrer">삼성전자 IR</a> · <a href="https://news.skhynix.com/en/tag/quarterly-earnings/" target="_blank" rel="noreferrer">SK하이닉스 뉴스룸</a> · <a href="https://stockhub.kr/events/earning_005930" target="_blank" rel="noreferrer">삼성전자 예상일</a> · <a href="https://stockhub.kr/events/earning_000660" target="_blank" rel="noreferrer">SK하이닉스 예상일</a></p>
+  </main>
+  <script>
+    const today = new Date();
+    const events = [
+      {date:'2026-04-30',company:'samsung',name:'삼성전자',quarter:'2026년 1분기 실적 발표',status:'확정',url:'https://news.samsung.com/global/samsung-electronics-announces-first-quarter-2026-results'},
+      {date:'2026-04-22',company:'hynix',name:'SK하이닉스',quarter:'2026년 1분기 실적 발표',status:'확정',url:'https://news.skhynix.com/en/q1-2026-business-results/'},
+      {date:'2026-07-30',company:'samsung',name:'삼성전자',quarter:'2026년 2분기 실적 발표',status:'확정',url:'https://news.samsung.com/global/samsung-electronics-announces-second-quarter-2026-results'},
+      {date:'2026-07-29',company:'hynix',name:'SK하이닉스',quarter:'2026년 2분기 실적 발표',status:'확정',url:'https://news.skhynix.com/en/q2-2026-business-results/'},
+      {date:'2026-10-29',company:'samsung',name:'삼성전자',quarter:'2026년 3분기 실적 발표',status:'확정',url:'https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results'},
+      {date:'2026-10-28',company:'hynix',name:'SK하이닉스',quarter:'2026년 3분기 실적 발표',status:'확정',url:'https://news.skhynix.com/en/q3-2026-business-results/'},
+      {date:'2027-01-27',company:'samsung',name:'삼성전자',quarter:'2026년 4분기 실적 발표',status:'예상',url:'https://stockhub.kr/events/earning_005930'},
+      {date:'2027-01-27',company:'hynix',name:'SK하이닉스',quarter:'2026년 4분기 실적 발표',status:'예상',url:'https://stockhub.kr/events/earning_000660'}
+    ];
+    const monthNames=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    const pad=n=>String(n).padStart(2,'0');
+    const key=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const nextEvent=events.filter(e=>e.date>=key(today)).sort((a,b)=>a.date.localeCompare(b.date))[0];
+    let view=nextEvent?new Date(Number(nextEvent.date.slice(0,4)),Number(nextEvent.date.slice(5,7))-1,1):new Date(today.getFullYear(),today.getMonth(),1);
+    let selected=null;
+    let company='all';
+    const fmtDate=d=>`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
+    document.getElementById('todayLabel').textContent=`${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
+    function render(){
+      document.getElementById('monthTitle').textContent=`${view.getFullYear()}년 ${monthNames[view.getMonth()]}`;
+      const grid=document.getElementById('daysGrid'); grid.innerHTML='';
+      const first=new Date(view.getFullYear(),view.getMonth(),1);
+      const start=new Date(view.getFullYear(),view.getMonth(),1-first.getDay());
+      for(let i=0;i<42;i++){
+        const d=new Date(start); d.setDate(start.getDate()+i);
+        const dateKey=key(d); const isToday=dateKey===key(today); const visibleEvents=events.filter(e=>e.date===dateKey&&(company==='all'||e.company===company));
+        const cell=document.createElement('button'); cell.type='button'; cell.className='day'+(d.getMonth()!==view.getMonth()?' outside':'')+(selected===dateKey?' selected':''); cell.setAttribute('aria-label',`${fmtDate(d)}${visibleEvents.length?' 일정 '+visibleEvents.map(e=>e.name).join(', '):''}`);
+        let content=`<span class="date-num">${isToday?'<span class="today-mark">'+d.getDate()+'</span>':'<span>'+d.getDate()+'</span>'}</span>`;
+        visibleEvents.slice(0,2).forEach(e=>{content+=`<span class="event ${e.company==='hynix'?'hynix':''} ${e.status==='예상'?'estimated':''}">${e.name}<small class="event-sub">${e.quarter.replace(' 실적 발표','')} · ${e.status}</small></span>`});
+        if(visibleEvents.length>2)content+=`<span class="more">+${visibleEvents.length-2}개 일정</span>`;
+        cell.innerHTML=content; cell.addEventListener('click',()=>{selected=dateKey;render();}); grid.appendChild(cell);
+      }
+      renderDetail();
+    }
+    function renderDetail(){
+      const d=selected?new Date(selected+'T12:00:00'):new Date(view.getFullYear(),view.getMonth(),1);
+      document.getElementById('detailTitle').textContent=selected?'선택한 날짜':'이번 달 일정';
+      document.getElementById('detailDate').textContent=selected?fmtDate(d):`${view.getFullYear()}년 ${monthNames[view.getMonth()]}`;
+      const items=events.filter(e=>(selected?e.date===selected:e.date.startsWith(`${view.getFullYear()}-${pad(view.getMonth()+1)}`))&&(company==='all'||e.company===company));
+      const list=document.getElementById('eventList');
+      if(!items.length){list.innerHTML='<div class="empty">해당 날짜에 등록된 실적 발표 일정이 없습니다.<br>공식 발표가 확인되면 일정을 업데이트할 수 있습니다.</div>';return}
+      list.innerHTML=items.map(e=>`<article class="event-row ${e.company}"><span class="event-logo">${e.company==='hynix'?'SK':'삼성'}</span><div class="row-text"><div class="row-title">${e.name} · ${e.quarter}</div><div class="row-meta">${e.date.replaceAll('-','.')} · 한국 시간</div></div><span class="status ${e.status==='예상'?'estimate':''}">${e.status}</span><a class="source-link" href="${e.url}" target="_blank" rel="noreferrer" aria-label="${e.name} 출처 보기">출처 ↗</a></article>`).join('');
+    }
+    document.getElementById('prevMonth').addEventListener('click',()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);selected=null;render()});
+    document.getElementById('nextMonth').addEventListener('click',()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);selected=null;render()});
+    document.getElementById('currentMonth').addEventListener('click',()=>{view=new Date(today.getFullYear(),today.getMonth(),1);selected=null;render()});
+    document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{company=b.dataset.company;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()}));
+    render();
+  </script>
+</body>
+</html>
